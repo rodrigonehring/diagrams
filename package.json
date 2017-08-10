@@ -13,7 +13,6 @@
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.10",
     "react-tap-event-plugin": "^2.0.1",
-    "storm-react-diagrams": "^2.4.9",
     "typeface-roboto": "^0.0.35"
   },
   "scripts": {

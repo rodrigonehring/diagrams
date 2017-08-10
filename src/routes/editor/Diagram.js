@@ -5,11 +5,17 @@ import { DiamondNodeModel } from './models/Diamond/DiamondNodeModel'
 import { DiamondWidgetFactory } from './models/Diamond/DiamondWidgetFactory'
 import { DiamondNodeFactory, DiamondPortFactory } from './models/Diamond/DiamondInstanceFactories'
 
+// custom models
+import ModelSquare from './models/Square'
+// const ModelSquare = {}
+
 export default class Diagram extends React.Component {
   constructor(props) {
     super(props)
+    let a = ModelSquare
+    console.log(a)
 
-    // para conseguir ver com ref deste component
+    // para conseguir ver com ref da instance deste component
     this.serialize = this.serialize
 
     // Setup the diagram engine
@@ -17,10 +23,9 @@ export default class Diagram extends React.Component {
     this.engine.registerNodeFactory(new RJD.DefaultNodeFactory())
     this.engine.registerLinkFactory(new RJD.DefaultLinkFactory())
     this.engine.registerNodeFactory(new DiamondWidgetFactory())
+    this.engine.registerNodeFactory(new ModelSquare.WidgetFactory())
 
-    console.log(props.model)
     props.model ? this.serialize(props.model) : this.createEmpty()
-
   }
 
   createEmpty() {
@@ -46,8 +51,14 @@ export default class Diagram extends React.Component {
     diamondNode.x = 400
     diamondNode.y = 100
 
+    // Create the quare node
+    const squareNode = new ModelSquare.NodeModel()
+    squareNode.x = 50
+    squareNode.y = 50
+
 
     this.model.addNode(diamondNode)
+    this.model.addNode(squareNode)
     this.model.addNode(node1)
     this.model.addNode(node2)
   }
@@ -62,6 +73,9 @@ export default class Diagram extends React.Component {
     engine.registerInstanceFactory(new RJD.LinkInstanceFactory())
     engine.registerInstanceFactory(new DiamondNodeFactory())
     engine.registerInstanceFactory(new DiamondPortFactory())
+
+    engine.registerInstanceFactory(new ModelSquare.NodeFactory())
+    engine.registerInstanceFactory(new ModelSquare.PortFactory())
 
     // Serialize the model
     if (!str) {
