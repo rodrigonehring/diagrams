@@ -4,68 +4,84 @@ import * as SRD from 'react-js-diagrams'
 export class NodeWidget extends React.Component  {
   static defaultProps = {
     size:150,
-    node: null
+    node: null,
+    name: 'olar'
+  }
+
+  updateName = () => {
+    // Set new name
+    this.props.node.name = "test";
+    this.props.diagramEngine.forceUpdate()
+    console.log(this.props.diagramEngine)
+
   }
 
   render() {
+    const { size, name } = this.props
+
     return (
-      React.DOM.div({className: "square-node", style: {position: 'relative', width: this.props.size, height: this.props.size}},
-        React.DOM.svg({
-          width:this.props.size,height: this.props.size,dangerouslySetInnerHTML: {__html:`
-            <g id="Layer_1">
-            </g>
-            <g id="Layer_2">
-              <polygon fill="cyan" stroke="#ccc" stroke-width="3" stroke-miterlimit="10" points="10,`+(this.props.size/2)+` `+(this.props.size/2)+`,10 `+(this.props.size-10)+`,`+(this.props.size/2)+` `+(this.props.size/2)+`,`+(this.props.size-10)+` "/>
-            </g>
-        `}}),
-
-        // left node
-        React.DOM.div({
-          style: {
-            position: 'absolute',
-            zIndex: 10,
-            top: this.props.size / 2 - 5
-          }
-        },
-          React.createElement(SRD.PortWidget,{name: 'left', node: this.props.node})
-        ),
-
-        // top node
-        React.DOM.div({
-          style: {
-            position: 'absolute',
-            zIndex: 10,
-            left: this.props.size / 2 - 8
-          }
-        },
-          React.createElement(SRD.PortWidget,{name: 'top', node: this.props.node})
-        ),
-
-        // right
-        React.DOM.div({
-          style: {
-            position: 'absolute',
-            zIndex: 10,
-            left: this.props.size - 10,
-            top: this.props.size / 2
-          }
-        },
-          React.createElement(SRD.PortWidget,{name: 'right', node: this.props.node})
-        ),
-
-        // bottom
-        React.DOM.div({
-          style: {
-            position: 'absolute',
-            zIndex: 10,
-            left: this.props.size / 2 - 8,
-            top: this.props.size - 10
-          }
-        },
-          React.createElement(SRD.PortWidget,{name: 'bottom', node: this.props.node})
-        )
-      )
+      <div style={{ border: '1px solid red', width: size, height: size }} onClick={this.updateName}>
+        {name}
+      </div>
     )
+    // return (
+    //   React.DOM.div({className: "square-node", style: {position: 'relative', width: this.props.size, height: this.props.size}},
+    //     React.DOM.svg({
+    //       width:this.props.size,height: this.props.size,dangerouslySetInnerHTML: {__html:`
+    //         <g id="Layer_1">
+    //         </g>
+    //         <g id="Layer_2">
+    //           <polygon fill="cyan" stroke="#ccc" stroke-width="3" stroke-miterlimit="10" points="10,`+(this.props.size/2)+` `+(this.props.size/2)+`,10 `+(this.props.size-10)+`,`+(this.props.size/2)+` `+(this.props.size/2)+`,`+(this.props.size-10)+` "/>
+    //         </g>
+    //     `}}),
+
+    //     // left node
+    //     React.DOM.div({
+    //       style: {
+    //         position: 'absolute',
+    //         zIndex: 10,
+    //         top: this.props.size / 2 - 5
+    //       }
+    //     },
+    //       React.createElement(SRD.PortWidget,{name: 'left', node: this.props.node})
+    //     ),
+
+    //     // top node
+    //     React.DOM.div({
+    //       style: {
+    //         position: 'absolute',
+    //         zIndex: 10,
+    //         left: this.props.size / 2 - 8
+    //       }
+    //     },
+    //       React.createElement(SRD.PortWidget,{name: 'top', node: this.props.node})
+    //     ),
+
+    //     // right
+    //     React.DOM.div({
+    //       style: {
+    //         position: 'absolute',
+    //         zIndex: 10,
+    //         left: this.props.size - 10,
+    //         top: this.props.size / 2
+    //       }
+    //     },
+    //       React.createElement(SRD.PortWidget,{name: 'right', node: this.props.node})
+    //     ),
+
+    //     // bottom
+    //     React.DOM.div({
+    //       style: {
+    //         position: 'absolute',
+    //         zIndex: 10,
+    //         left: this.props.size / 2 - 8,
+    //         top: this.props.size - 10
+    //       }
+    //     },
+    //       React.createElement(SRD.PortWidget,{name: 'bottom', node: this.props.node})
+    //     )
+    //   )
+    // )
   }
 }
 

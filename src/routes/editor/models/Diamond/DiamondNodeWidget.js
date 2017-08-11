@@ -4,7 +4,8 @@ import * as SRD from 'react-js-diagrams'
 export class DiamonNodeWidget extends React.Component  {
   static defaultProps = {
     size:150,
-    node: null
+    node: null,
+    name: 'olar'
   }
 
   render() {
@@ -16,6 +17,7 @@ export class DiamonNodeWidget extends React.Component  {
             </g>
             <g id="Layer_2">
               <polygon fill="cyan" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="10,`+(this.props.size/2)+` `+(this.props.size/2)+`,10 `+(this.props.size-10)+`,`+(this.props.size/2)+` `+(this.props.size/2)+`,`+(this.props.size-10)+` "/>
+              ${this.props.name}
             </g>
         `}}),
 

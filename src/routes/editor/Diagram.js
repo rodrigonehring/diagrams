@@ -17,6 +17,7 @@ export default class Diagram extends React.Component {
 
     // para conseguir ver com ref da instance deste component
     this.serialize = this.serialize
+    this.create = this.create
 
     // Setup the diagram engine
     this.engine = new RJD.DiagramEngine()
@@ -26,6 +27,15 @@ export default class Diagram extends React.Component {
     this.engine.registerNodeFactory(new ModelSquare.WidgetFactory())
 
     props.model ? this.serialize(props.model) : this.createEmpty()
+  }
+
+  create = () => {
+    // Create the quare node
+    const squareNode = new ModelSquare.NodeModel()
+    squareNode.x = 50
+    squareNode.y = 50
+
+    this.model.addNode(squareNode)
   }
 
   createEmpty() {
