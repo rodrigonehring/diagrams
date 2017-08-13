@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography'
 
 import DialogName from '../../common/dialogs/name'
 import DiagramsTable from './components/table'
-import { getDiagrams, createDiagram, deleteDiagram } from '../../service'
+import { getDiagrams, createDiagram, deleteDiagram, createDemo } from '../../service'
 
 
 class Home extends React.Component {
@@ -27,6 +27,13 @@ class Home extends React.Component {
 
   createDiagram = () => {
     this.setState({ modalOpened: true })
+  }
+
+  createDiagramDemo = () => {
+    createDemo()
+      .then(() => {
+        this.getDiagrams()
+      })
   }
 
   handleClose = (data) => {
@@ -50,12 +57,21 @@ class Home extends React.Component {
 
   render() {
     const buttonCreate = (
-      <Button
-        raised
-        color="primary"
-        onClick={this.createDiagram}>
-          <IconNew /> Create a new diagram
-      </Button>
+      <div>
+        <Button
+          raised
+          color="primary"
+          onClick={this.createDiagram}>
+            <IconNew /> Create a new diagram
+        </Button>
+        <Button
+          raised
+          color="accent"
+          style={{ marginLeft: 10 }}
+          onClick={this.createDiagramDemo}>
+            <IconNew /> Create a new diagram from demo model
+        </Button>
+      </div>
     )
 
     return (

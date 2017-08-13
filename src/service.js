@@ -1,4 +1,5 @@
 import ls from 'local-storage'
+import demo from './demo'
 
 const DGM = 'diagrams'
 
@@ -21,11 +22,12 @@ export function getDiagram(id) {
   })
 }
 
-export function createDiagram({ name }) {
+export function createDiagram({ name, model }) {
   return new Promise((resolve, reject) => {
     const diagrams = ls(DGM) || []
     const diagram = {
       name,
+      model,
       id: diagrams.length ? Math.max.apply(Math, diagrams.map(i => i.id)) + 1 : 1, // get the biggest value plus one
       createdAt: new Date().toString(),
     }
@@ -35,6 +37,10 @@ export function createDiagram({ name }) {
 
     resolve()
   })
+}
+
+export function createDemo() {
+  return createDiagram({ name: 'Demo model', model: demo.model })
 }
 
 export function updateDiagram({ id, ...newProps }) {

@@ -83,7 +83,6 @@ export default class Diagram extends React.Component {
     // deserialize
     this.model = new RJD.DiagramModel()
     this.model.deSerializeDiagram(JSON.parse(str), engine)
-
   }
 
   render() {

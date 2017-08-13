@@ -47,7 +47,6 @@ export default class extends React.Component {
       data.extras = { ...newData }
       this.diagram.forceUpdate()
     } else {
-      console.log('create', type, newData)
       this.diagram.create(type, newData)
       this.diagram.forceUpdate()
     }
