@@ -10,7 +10,7 @@ import Editor from './editor'
 export default class extends React.Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename="/diagrams/build">
         <AppWrapper>
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />
