@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as SRD from 'react-js-diagrams'
 
 function getPolygon(size) {
-  return `0,0 ${size},0 ${size},${size} 0,${size}` 
+  return `0,${size/2} ${size/2},0 ${size},${size/2} ${size/2},${size}`
 }
  
 export class NodeWidget extends React.Component  {
@@ -33,20 +33,17 @@ export class NodeWidget extends React.Component  {
           </g>
 
         </svg>
-        <div className="node-port" style={{ position: 'absolute', zIndex: 100, top: (size / 2) - 8, left: 0 }}>
-          <SRD.PortWidget name="left" node={node} />
+        <div className="node-port" style={{ position: 'absolute', zIndex: 100, top: size - 10, left: size / 2 - 9 }}>
+          <SRD.PortWidget name="bottom" node={node} />
         </div>
-
-        <div className="node-port" style={{ position: 'absolute', zIndex: 100, top: (size / 2) - 8, left: size - 17 }}>
-          <SRD.PortWidget name="right" node={node} />
-        </div>
-
-        <div className="node-port" style={{ position: 'absolute', zIndex: 100, top: 0, left: (size / 2) - 8 }}>
+        <div className="node-port" style={{ position: 'absolute', zIndex: 100, top: -7, left: size / 2 - 9 }}>
           <SRD.PortWidget name="top" node={node} />
         </div>
-
-        <div className="node-port" style={{ position: 'absolute', zIndex: 100, top: size - 17, left: (size / 2) - 8 }}>
-          <SRD.PortWidget name="bottom" node={node} />
+        <div className="node-port" style={{ position: 'absolute', zIndex: 100, top: size / 2 - 9, left: -9 }}>
+          <SRD.PortWidget name="left" node={node} />
+        </div>
+        <div className="node-port" style={{ position: 'absolute', zIndex: 100, top: size / 2 - 9, left: size - 9  }}>
+          <SRD.PortWidget name="right" node={node} />
         </div>
       </div>
     )

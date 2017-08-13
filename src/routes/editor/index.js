@@ -20,7 +20,8 @@ export default class extends React.Component {
     error: false,
     diagram: {},
     dialogCreate: {
-      open: true
+      open: false,
+      data: {}, // when edit mode
     },
   }
 
@@ -38,15 +39,32 @@ export default class extends React.Component {
     updateDiagram({ ...this.state.diagram, model })
   }
 
-  createNode = () => {
-    this.diagram.create()
-    this.diagram.forceUpdate()
+  createNode = ({ type, ...newData } = {}) => {
+    const { data, editMode } = this.state.dialogCreate
+    this.setState({ dialogCreate: { open: false } })
+
+    if (editMode) {
+      data.extras = { ...newData }
+      this.diagram.forceUpdate()
+    } else {
+      console.log('create', type, newData)
+      this.diagram.create(type, newData)
+      this.diagram.forceUpdate()
+    }
+  }
+
+  openDialogCreate = (data) => {
+    this.setState({
+      dialogCreate: {
+        open: true,
+        data,
+        editMode: !!data,
+      }
+    })
   }
 
   render() {
-    const { error, diagram } = this.state
-
-    // debugger
+    const { error, diagram, dialogCreate } = this.state
 
     if (error)
       return <NotFound id={this.props.match.params.id} />
@@ -54,13 +72,19 @@ export default class extends React.Component {
     return (
       <div>
 
-        <DialogCreate open={this.state.dialogCreate.open} handleClose={console.log} />
+        <DialogCreate
+          open={dialogCreate.open}
+          data={dialogCreate.data}
+          editMode={dialogCreate.editMode}
+          handleClose={this.createNode}
+          cancel={() => this.setState({ dialogCreate: { open: false }})}
+        />
 
         <Button
           raised
-          color="primary"
+          color="accent"
           style={{ marginRight: 10 }}
-          onClick={this.createNode}>
+          onClick={() => this.openDialogCreate()}>
             <IconNew /> Create
         </Button>
 
@@ -72,7 +96,11 @@ export default class extends React.Component {
         </Button>
 
         <div className="editor-area">
-          <Diagram ref={(ref) => { this.diagram = ref }} model={diagram.model}  />
+          <Diagram
+            ref={(ref) => { this.diagram = ref }}
+            model={diagram.model}
+            openDialogCreate={this.openDialogCreate}
+          />
         </div>
       </div>
     )

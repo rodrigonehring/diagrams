@@ -1,7 +1,7 @@
 import * as SRD from 'react-js-diagrams'
 import * as _ from 'lodash'
 
-export class DiamondPortModel extends SRD.PortModel {
+export default class PortModel extends SRD.PortModel {
   constructor(pos = 'top') {
     super(pos)
     this.position = pos

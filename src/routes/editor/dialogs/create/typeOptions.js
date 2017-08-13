@@ -13,8 +13,9 @@ const styleSheet = createStyleSheet(theme => ({
 }))
 
 const options = [
-  'Square',
-  'Default',
+  'square',
+  'triangle',
+  'diamond',
 ]
 
 class SimpleListMenu extends Component {
@@ -24,7 +25,9 @@ class SimpleListMenu extends Component {
     selectedIndex: 1,
   }
 
-  button = undefined
+  componentWillMount() {
+    this.props.onChange(options[this.state.selectedIndex])
+  }
 
   handleClickListItem = event => {
     this.setState({ open: true, anchorEl: event.currentTarget })
@@ -32,6 +35,7 @@ class SimpleListMenu extends Component {
 
   handleMenuItemClick = (event, index) => {
     this.setState({ selectedIndex: index, open: false })
+    this.props.onChange(options[index])
   }
 
   handleRequestClose = () => {
@@ -40,6 +44,9 @@ class SimpleListMenu extends Component {
 
   render() {
     const classes = this.props.classes
+
+    if (this.props.disabled) return null
+
     return (
       <div className={classes.root}>
         <List>
