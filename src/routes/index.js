@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
-import AppWrapper from './app'
+import AppWrapper from '../common/app'
 import Home from './home'
 import About from './about'
 import Editor from './editor'

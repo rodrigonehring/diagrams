@@ -55,36 +55,6 @@ export default class Diagram extends React.Component {
   createEmpty() {
     // Setup the diagram model
     this.model = new RJD.DiagramModel()
-
-    // const node1 = this.createNode({
-    //   name: 'Node 1',
-    //   color: 'rgb(0, 192, 255)',
-    //   x: 100,
-    //   y: 100
-    // })
-
-    // const node2 = this.createNode({
-    //   name: 'Node 2',
-    //   color: 'rgb(0, 192, 0)',
-    //   x: 200,
-    //   y: 100
-    // })
-
-    // // Create the diamond node
-    // const diamondNode = new DiamondNodeModel()
-    // diamondNode.x = 400
-    // diamondNode.y = 100
-
-    // // Create the quare node
-    // const squareNode = new ModelSquare.NodeModel()
-    // squareNode.x = 50
-    // squareNode.y = 50
-
-
-    // this.model.addNode(diamondNode)
-    // this.model.addNode(squareNode)
-    // this.model.addNode(node1)
-    // this.model.addNode(node2)
   }
 
   // Serialize, deSerialize the model
